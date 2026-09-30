@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Comic — ComicCraft</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="preview-page">
+    <header class="topbar">
+        <a class="logo" href="/">Comic<span>Craft</span></a>
+        <a class="secondary-btn" href="/">+ New Comic</a>
+    </header>
+
+    <main class="preview-shell">
+        <section class="preview-heading">
+            <span class="badge">YOUR AI-GENERATED COMIC</span>
+            <h1>Story Preview</h1>
+            <p>{{ story_prompt }}</p>
+        </section>
+
+        <section class="comic-grid">
+            {% for panel in layout %}
+            <article class="comic-panel">
+                <div class="panel-title">
+                    <span>Panel {{ panel.panel_number }}</span>
+                    <h2>{{ panel.title }}</h2>
+                </div>
+
+                <img src="{{ panel.image_path }}" alt="{{ panel.title }}" loading="lazy">
+
+                <div class="panel-copy">
+                    <p class="scene"><em>{{ panel.scene_description }}</em></p>
+                    <p><strong>Caption:</strong> {{ panel.caption }}</p>
+                    <p><strong>Narration:</strong> {{ panel.narration }}</p>
+                    <p><strong>Dialogue:</strong> {{ panel.dialogue }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </section>
+
+        <section class="export-card">
+            <div>
+                <h2>Ready to save your comic?</h2>
+                <p>Download all five panels, titles, captions and narration as an A4 PDF.</p>
+            </div>
+            <button class="primary-btn" onclick="downloadComic('{{ pdf_path }}')">📄 Download Your Comic as PDF</button>
+        </section>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
